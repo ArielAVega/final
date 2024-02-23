@@ -1,6 +1,8 @@
 package com.vegasystems.service.imp;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +53,19 @@ public class PeliculaServiceImp implements IPeliculaService{
 		}
 		// TODO Auto-generated method stub
 		return resumenPeliculaDTO;
+	}
+
+	@Override
+	public List<PeliculaDTO> buscarPorTitulo(String titulo) {
+		List<Pelicula> peliculas = peliculaRepository.findByTituloContainingIgnoreCase(titulo);
+		System.out.println("el repository se lleva a cabo");
+		List<PeliculaDTO> peliculasDTO = peliculas.stream()
+				.map(p->{
+					PeliculaDTO peliculaDTO = peliculaMapper.peliculaToPeliculaDTO(p);
+					return peliculaDTO;
+				}).collect(Collectors.toList());
+				
+		return peliculasDTO;
 	}
 
 }

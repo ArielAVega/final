@@ -3,9 +3,8 @@ package com.vegasystems.peliculas;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class RegistroPeliculaTest {
 		pelicula.setTitulo("Titulo01");
 		pelicula.setUrlWeb("url web pelicula 01");
 		
-		Set<Genero> generos = new HashSet<>();
+		List<Genero> generos = new ArrayList<>();
 		generos.add(genero1);
 		generos.add(genero2);
 		pelicula.setGeneros(generos);

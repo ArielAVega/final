@@ -1,6 +1,8 @@
 package com.vegasystems.dto.mapper;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,7 +30,7 @@ public class PeliculaMapper {
 		imagenPelicula.setNombreArchivo(peliculaDTO.getNombreImagen());
 		imagenPelicula.setImagen(peliculaDTO.getImagenPelicula());
 		pelicula.setImagenPelicula(imagenPelicula);
-		Set<Genero> generos = new HashSet<>();
+		List<Genero> generos = new ArrayList();
 		for(String g: peliculaDTO.getGeneros()) {
 			generos.add(generoRepository.findByNombreGenero(g));
 		}
@@ -46,6 +48,17 @@ public class PeliculaMapper {
 		resumenPeliculaDTO.setTitulo(pelicula.getTitulo());
 		resumenPeliculaDTO.setUrlWeb(pelicula.getUrlWeb());
 		return resumenPeliculaDTO;
+	}
+	
+	public PeliculaDTO peliculaToPeliculaDTO(Pelicula pelicula) {
+		PeliculaDTO peliculaDTO = new PeliculaDTO();
+		List<String> generosString = pelicula.getGeneros().stream()
+						.map(g->g.getNombreGenero()).collect(Collectors.toList());
+		peliculaDTO.setGeneros(generosString);
+		peliculaDTO.setImagenPelicula(pelicula.getImagenPelicula().getImagen());
+		peliculaDTO.setTitulo(pelicula.getTitulo());
+		peliculaDTO.setUrlWeb(pelicula.getUrlWeb());
+		return peliculaDTO;
 	}
 	
 }
