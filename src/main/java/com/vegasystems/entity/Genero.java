@@ -1,5 +1,6 @@
 package com.vegasystems.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -22,8 +23,8 @@ public class Genero {
 	private Integer id;
 	@Column(name = "gen_nombre",nullable = false,length = 15)
 	private String nombreGenero;
-	@ManyToMany(mappedBy = "generos")
-	private Set<Pelicula> peliculas;
+	@ManyToMany(mappedBy = "generos", fetch = FetchType.EAGER)
+	private List<Pelicula> peliculas;
 	
 
 }
